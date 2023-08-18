@@ -28,6 +28,8 @@ const rowStyle = {
   marginBottom: "10px",
 };
 
+const editorKey = "editor-value-key-1";
+
 let containerValue;
 
 class Stage extends Component {
@@ -60,7 +62,7 @@ class Stage extends Component {
 
     function onContainerFirstCreated(container) {
       // Set initial state of the editorMap.
-      container.initialObjects.editorMap.set("editor-value-key", 1);
+      container.initialObjects.editorMap.set(editorKey, 1);
     }
 
     const { container } = await client.joinContainer(
@@ -87,14 +89,13 @@ class Stage extends Component {
   }
 
   updateEditorState = () => {
-    const editorValue =
-      containerValue.initialObjects.editorMap.get("editor-value-key");
+    const editorValue = containerValue.initialObjects.editorMap.get(editorKey);
     this.setState({ data: editorValue });
   };
 
   handleClick = (value) => {
     const editorMap = containerValue.initialObjects.editorMap;
-    editorMap.set("editor-value-key", value);
+    editorMap.set(editorKey, value);
   };
 
   render() {
