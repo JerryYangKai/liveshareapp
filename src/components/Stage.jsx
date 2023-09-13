@@ -28,7 +28,7 @@ const rowStyle = {
   marginBottom: "10px",
 };
 
-const editorKey = "editor-value-key-1";
+const editorKey = "editor-value-key-test";
 
 let containerValue;
 
@@ -54,8 +54,9 @@ class Stage extends Component {
   }
 
   async internalStart() {
-    await Teams.app.initialize();
-    Teams.app.notifySuccess();
+    await Teams.app.initialize().then(() => {
+      Teams.app.notifySuccess();
+    });
     window.localStorage.debug = "fluid:*";
     const host = Teams.LiveShareHost.create();
     const client = new LiveShareClient(host);
@@ -69,13 +70,16 @@ class Stage extends Component {
       containerSchema,
       onContainerFirstCreated
     );
+
+    //Editor scenario
     containerValue = container;
     containerValue.initialObjects.editorMap.on(
       "valueChanged",
       this.updateEditorState
     );
-    const inkingHost = document.getElementById("inkingHost");
 
+    //Canvas scenario
+    const inkingHost = document.getElementById("inkingHost");
     if (inkingHost) {
       const liveCanvas = container.initialObjects.liveCanvas;
 

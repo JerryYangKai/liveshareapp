@@ -20,7 +20,7 @@ class TabConfig extends React.Component {
         const baseUrl = `${window.location.origin}`;
         pages.config
           .setConfig({
-            suggestedDisplayName: "Live Share Canvas",
+            suggestedDisplayName: "Live Share Demo",
             contentUrl: baseUrl + "/index.html#/sidepanel",
             websiteUrl: baseUrl + "/index.html#/sidepanel",
           })
